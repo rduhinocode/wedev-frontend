@@ -1,4 +1,4 @@
-# wedev
+# wedev front-end
 
 ## Project setup
 ```
