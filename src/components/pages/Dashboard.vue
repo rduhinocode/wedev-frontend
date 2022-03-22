@@ -24,7 +24,6 @@
           <div class="col-md-6 ">
             <button type="button" class="btn btn-info my-2 gradient-custom-2 mb-3 fa-pull-right" @click="openModal = true">Add User</button>
           </div>
-
         </div>
 
         <table class="table table-striped table-bordered">
@@ -57,15 +56,7 @@
           </tr>
           </tbody>
         </table>
-        <div class="center">
-          <div class="pagination">
-            <a href="#" :class="{ 'disabled-link': filter.page == 1 }" @click="paginate( filter.page - 1 )">&laquo;</a>
-            <a href="#" v-for="index in pagination.last_page"
-               :key="index"
-               :class="{'active': index == pagination.current_page}" @click="paginate(index)">{{ index }}</a>
-            <a href="#" :class="{'disabled-link' : filter.page == pagination.last_page}" @click="paginate( filter.page + 1 )">&raquo;</a>
-          </div>
-        </div>
+        <pagination-component :meta-data="pagination" @paginate="paginate"/>
       </div>
     </section>
 
@@ -77,12 +68,13 @@
 <script>
 import UserService from "@/services/user.service";
 import UserModal from "@/components/modal/users/User";
+import PaginationComponent from "@/components/common/Pagination";
 
 export default {
   name: "DashboardPage",
   components: {
     UserModal,
-
+    PaginationComponent
   },
   data() {
     return {
@@ -174,48 +166,19 @@ export default {
   position: relative;
   padding: 0 0 0 50px;
 }
+
 .icon{
   position: absolute;
   top: 0;
   left:0;
 }
+
 .name,
 .email{
   display: block;
 }
 
-.center {
-  text-align: center;
-}
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
 .pointer {
   cursor: pointer;
 }
-
-.disabled-link {
-  pointer-events: none;
-}
-
 </style>
